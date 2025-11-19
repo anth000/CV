@@ -1,0 +1,127 @@
+:root {
+  color-scheme: dark;
+  --text: #f4f5fb;
+  --muted: #8da0c3;
+  --panel: rgba(8, 12, 24, 0.65);
+  --accent: #f9c846;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #04080f;
+  color: var(--text);
+  min-height: 400vh;
+  overflow-x: hidden;
+}
+
+#portfolio-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: radial-gradient(circle at top, #243b55, #090a0f);
+  z-index: 0;
+}
+
+.ui-layer {
+  position: relative;
+  z-index: 2;
+  width: min(900px, 90vw);
+  margin: 0 auto;
+  padding-top: 15vh;
+}
+
+.hero {
+  padding: 2rem;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.hero .tag {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.hero h1 {
+  margin: 0.7rem 0;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+#timeline {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+}
+
+.stage {
+  min-height: 65vh;
+  padding: 2.4rem;
+  border-radius: 28px;
+  background: rgba(6, 8, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.6s ease, opacity 0.6s ease, border-color 0.6s ease;
+  opacity: 0.35;
+  transform: translateY(40px) scale(0.97);
+}
+
+.stage.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  border-color: rgba(249, 200, 70, 0.8);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.stage h2 {
+  margin-top: 0;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+}
+
+.stage ul {
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+
+.stage a {
+  color: var(--accent);
+}
+
+.footer {
+  text-align: center;
+  padding: 4rem 0 8rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 720px) {
+  .hero,
+  .stage {
+    padding: 1.6rem;
+  }
+
+  body {
+    min-height: 450vh;
+  }
+}
