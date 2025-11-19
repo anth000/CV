@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Immersif — Colline Low Poly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <canvas id="portfolio-scene" aria-hidden="true"></canvas>
+
+    <div class="ui-layer">
+      <header class="hero">
+        <div class="tag">Portfolio vivant</div>
+        <h1>Anthony Moulin</h1>
+        <p>
+          Ingénieur créatif spécialisé en IA, Data et expériences immersives. Scroll pour
+          traverser ma journée et découvrir mon parcours.
+        </p>
+      </header>
+
+      <main id="timeline">
+        <section class="stage" data-start="0" data-end="0.18">
+          <h2>Aube — Vision</h2>
+          <p>
+            Construire des passerelles entre sciences des données, optimisation et design pour
+            raconter des histoires interactives qui ont du sens.
+          </p>
+        </section>
+
+        <section class="stage" data-start="0.18" data-end="0.36">
+          <h2>Formation</h2>
+          <ul>
+            <li>Diplôme d'ingénieur — IMT Mines Alès (IA & Optimisation)</li>
+            <li>MSc Interaction Homme Machine — MIT Media Lab (visiteur)</li>
+          </ul>
+        </section>
+
+        <section class="stage" data-start="0.36" data-end="0.52">
+          <h2>Compétences</h2>
+          <p>Python, TensorFlow, PM4Py, React, Three.js, Unity/AR, Firebase</p>
+          <p>Spécialités : IA générative, process mining, prototypes XR.</p>
+        </section>
+
+        <section class="stage" data-start="0.52" data-end="0.7">
+          <h2>Expériences</h2>
+          <ul>
+            <li>Lead Data Scientist — Agence d'innovation (4 ans)</li>
+            <li>Consultant IA — Industrie & santé (missions internationales)</li>
+            <li>Directeur technique — Studio XR (freelance)</li>
+          </ul>
+        </section>
+
+        <section class="stage" data-start="0.7" data-end="0.86">
+          <h2>Projets</h2>
+          <ul>
+            <li>Constellation IA : plateforme de monitoring temps réel</li>
+            <li>Cartographie process mining multi-sites</li>
+            <li>Expériences AR pour musées et salons</li>
+          </ul>
+        </section>
+
+        <section class="stage" data-start="0.86" data-end="1">
+          <h2>Contact</h2>
+          <p>
+            Disponible pour collaborations, conférences et missions conseil. Écrivez-moi sur
+            <a href="mailto:anthony@example.com">anthony@example.com</a> ou
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>.
+          </p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Scroll pour faire défiler le temps</span>
+      </footer>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
