@@ -13,7 +13,8 @@ const timeline = [
     phase: 'Aube',
     range: '0% → 20%',
     start: 0,
-    end: 0.2
+    end: 0.2,
+    accent: '#f3a39f'
   },
   {
     id: 'skills',
@@ -24,7 +25,8 @@ const timeline = [
     phase: 'Plein jour',
     range: '20% → 45%',
     start: 0.2,
-    end: 0.45
+    end: 0.45,
+    accent: '#63d3c6'
   },
   {
     id: 'experience',
@@ -35,7 +37,8 @@ const timeline = [
     phase: 'Crépuscule',
     range: '45% → 70%',
     start: 0.45,
-    end: 0.7
+    end: 0.7,
+    accent: '#f3a6b4'
   },
   {
     id: 'projects',
@@ -46,7 +49,8 @@ const timeline = [
     phase: 'Nuit claire',
     range: '70% → 85%',
     start: 0.7,
-    end: 0.85
+    end: 0.85,
+    accent: '#9fb7ff'
   },
   {
     id: 'contact',
@@ -57,7 +61,8 @@ const timeline = [
     phase: 'Constellations',
     range: '85% → 100%',
     start: 0.85,
-    end: 1
+    end: 1,
+    accent: '#cbd6ff'
   }
 ];
 
@@ -89,18 +94,43 @@ const App = () => {
   return (
     <div className="app-shell">
       <CanvasScene progress={progress} />
+      <nav className="top-nav">
+        <div className="brand">
+          <span className="brand-mark">AM</span>
+          <div>
+            <p className="nav-label">Creative WebGL / React</p>
+            <p className="nav-name">Anthony Moulin</p>
+          </div>
+        </div>
+        <ul className="nav-links">
+          {[
+            { label: 'Home', href: '#top' },
+            { label: 'About', href: '#about' },
+            { label: 'Skills', href: '#skills' },
+            { label: 'Projects', href: '#projects' },
+            { label: 'Contact', href: '#contact-cta' }
+          ].map((item) => (
+            <li key={item.label}>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <div className="nav-dot" style={{ background: stop.accent }} />
+      </nav>
       <main>
-        <header className="hero">
+        <header className="hero" id="top">
           <p className="eyebrow">Portfolio immersif</p>
           <h1>
-            Anthony Moulin —<br /> Creative WebGL & React Developer
+            Welcome —<br />
+            <span className="serif">Explore the passage of time</span> on my journey.
           </h1>
-          <p className="intro">
-            Scroll pour faire défiler le temps : la colline reste immobile, le ciel se transforme et mon parcours apparaît dans la
-            lumière du moment.
+          <p className="intro" id="about">
+            Le soleil se lève, passe, se couche et laisse place aux étoiles. Mon parcours suit ce rythme :
+            <span className="pill" style={{ background: stop.accent }}> {stop.label} </span>
+            révèle la bonne étape à chaque scroll.
           </p>
           <div className="hero-meta">
-            <div>
+            <div className="halo" style={{ boxShadow: `0 0 0 18px ${stop.accent}15, 0 20px 50px ${stop.accent}40` }}>
               <p className="label">Phase actuelle</p>
               <p className="value" style={{ color: stop.accent }}>
                 {stop.label}
@@ -109,10 +139,14 @@ const App = () => {
             </div>
             <div>
               <p className="label">Progression</p>
+              <div className="progress-shell">
+                <span style={{ width: `${Math.round(progress * 100)}%`, background: stop.accent }} />
+              </div>
               <p className="value">{Math.round(progress * 100)}%</p>
               <p className="caption">Du soleil levant aux constellations.</p>
             </div>
           </div>
+          <div className="scroll-hint">Scroll pour voyager du matin à la nuit</div>
         </header>
 
         <section className="timeline">
@@ -121,7 +155,7 @@ const App = () => {
           ))}
         </section>
 
-        <section className="cta" id="contact">
+        <section className="cta" id="contact-cta">
           <div>
             <p className="eyebrow">Collaboration</p>
             <h2>Raconter votre histoire avec poésie et précision technique.</h2>

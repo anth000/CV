@@ -5,8 +5,15 @@ const TimelineSection = ({ section, progress }) => {
   const visibleProgress = Math.min(Math.max((progress - start) / (end - start), 0), 1);
   const isActive = progress >= start && progress <= end;
 
+  const style = {
+    '--accent': section.accent || '#ffffff',
+    '--reveal': visibleProgress,
+    opacity: Math.max(0.25, visibleProgress),
+    transform: `translateY(${12 - visibleProgress * 12}px) scale(${0.98 + visibleProgress * 0.02})`
+  };
+
   return (
-    <article className={`timeline-card ${isActive ? 'is-active' : ''}`}>
+    <article id={section.id} className={`timeline-card ${isActive ? 'is-active' : ''}`} style={style}>
       <div className="card-header">
         <span className="card-phase">{section.phase}</span>
         <span className="card-range">{section.range}</span>
