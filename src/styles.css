@@ -1,9 +1,12 @@
 :root {
   color-scheme: dark;
-  --text: #f4f5fb;
-  --muted: #8da0c3;
-  --panel: rgba(8, 12, 24, 0.65);
-  --accent: #f9c846;
+  font-family: 'Space Grotesk', 'Space Mono', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #04050f;
+  --bg-panel: rgba(5, 6, 14, 0.75);
+  --stroke: rgba(255, 255, 255, 0.15);
+  --text: #f5f6ff;
+  --muted: rgba(245, 246, 255, 0.6);
+  --blur: 32px;
 }
 
 * {
@@ -12,116 +15,248 @@
 
 body {
   margin: 0;
-  font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #04080f;
+  background: radial-gradient(circle at top, rgba(84, 105, 255, 0.25), rgba(0, 0, 0, 0));
   color: var(--text);
-  min-height: 400vh;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-#portfolio-scene {
+.canvas-layer {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  background: radial-gradient(circle at top, #243b55, #090a0f);
   z-index: 0;
 }
 
-.ui-layer {
+main {
   position: relative;
-  z-index: 2;
-  width: min(900px, 90vw);
+  z-index: 1;
+  padding: 4rem clamp(1.5rem, 5vw, 5rem) 6rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-top: 15vh;
 }
 
 .hero {
-  padding: 2rem;
-  background: var(--panel);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3rem;
+  border: 1px solid var(--stroke);
   border-radius: 32px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(var(--blur));
+  background: linear-gradient(135deg, rgba(10, 12, 25, 0.75), rgba(10, 12, 25, 0.45));
+  box-shadow: 0 30px 80px rgba(2, 4, 12, 0.6);
 }
 
-.hero .tag {
-  display: inline-flex;
-  gap: 0.4rem;
-  align-items: center;
-  font-size: 0.75rem;
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  margin-bottom: 1.5rem;
+}
+
+.hero .eyebrow {
   text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.hero .intro {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.hero-meta .label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   color: var(--muted);
 }
 
-.hero h1 {
-  margin: 0.7rem 0;
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+.hero-meta .value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0.2rem 0;
 }
 
-.hero p {
+.hero-meta .caption {
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.timeline {
+  margin-top: 4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.timeline-card {
+  padding: 2rem;
+  border-radius: 28px;
+  border: 1px solid transparent;
+  background: rgba(7, 9, 22, 0.75);
+  backdrop-filter: blur(var(--blur));
+  transition: border-color 0.4s ease, transform 0.4s ease, background 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 60%);
+  pointer-events: none;
+}
+
+.timeline-card.is-active {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-4px);
+  background: rgba(13, 16, 32, 0.85);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.card-body h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.6rem;
+}
+
+.card-body p {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
 }
 
-#timeline {
-  margin-top: 10vh;
+.card-tags {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
   display: flex;
-  flex-direction: column;
-  gap: 10vh;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.stage {
-  min-height: 65vh;
-  padding: 2.4rem;
-  border-radius: 28px;
-  background: rgba(6, 8, 18, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.6s ease, opacity 0.6s ease, border-color 0.6s ease;
-  opacity: 0.35;
-  transform: translateY(40px) scale(0.97);
+.card-tags li {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
-.stage.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  border-color: rgba(249, 200, 70, 0.8);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+.card-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.stage h2 {
-  margin-top: 0;
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
+.card-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4);
+  transform-origin: left;
 }
 
-.stage ul {
-  padding-left: 1.2rem;
-  line-height: 1.8;
+.cta {
+  margin-top: 5rem;
+  padding: 3rem;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(53, 20, 69, 0.7), rgba(8, 18, 41, 0.9));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
 }
 
-.stage a {
-  color: var(--accent);
+.cta h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 1rem;
 }
 
-.footer {
-  text-align: center;
-  padding: 4rem 0 8rem;
+.cta p {
   color: var(--muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+  line-height: 1.6;
 }
 
-@media (max-width: 720px) {
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 999px;
+  padding: 0.85rem 1.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.btn.primary {
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+  color: #12040b;
+}
+
+.btn.ghost {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--text);
+}
+
+footer {
+  margin: 4rem 0 0;
+  padding: 2rem 0 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--text);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
   .hero,
-  .stage {
-    padding: 1.6rem;
+  .cta {
+    padding: 2rem;
   }
 
-  body {
-    min-height: 450vh;
+  .hero-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }

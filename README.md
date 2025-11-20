@@ -1,29 +1,42 @@
-# Portfolio 3D Low Poly
+# Portfolio 3D Low Poly (React + Three.js)
 
-Expérience web immersive simulant une colline low poly et un ciel évolutif qui dévoile un CV interactif au fil du scroll.
+Expérience WebGL en React qui raconte le CV d’Anthony Moulin grâce à un cycle jour/nuit synchronisé au scroll. La colline low poly et
+le personnage restent fixes pendant que le ciel, les astres et les cartes de contenu évoluent.
 
 ## Aperçu créatif
-- Colline et personnage stylisés low poly ancrés au premier plan.
-- Ciel animé synchronisé au scroll (aube → jour → crépuscule → nuit).
-- Sections du CV qui apparaissent dans la couche UI au rythme du cycle du temps.
-- Soleil, lune et étoiles évoluent en Three.js pour renforcer le storytelling.
+- Canvas Three.js géré par React qui interpole les gradients du ciel, la position du soleil/de la lune et l’opacité des étoiles selon le scroll.
+- Timeline UI en glassmorphism : chaque carte du CV se remplit à mesure que l’utilisateur progresse dans la journée.
+- Section CTA et footer social pour conclure l’expérience avec un appel à collaboration.
 
-## Lancer le projet
-1. Servez les fichiers statiques avec n'importe quel serveur local (Vite, `npx serve`, Live Server, etc.).
-2. Ouvrez `index.html` dans un navigateur moderne compatible WebGL 2.
-
+## Démarrer le projet
 ```bash
-npx serve .
+npm install
+npm run dev
+```
+Le serveur Vite s’ouvre par défaut sur [http://localhost:4173](http://localhost:4173).
+
+### Build de production
+```bash
+npm run build
+npm run preview
 ```
 
-## Technologies principales
-- **Three.js** pour la scène low poly (colline, personnage, soleil/lune, étoiles).
-- **ShaderMaterial** personnalisé pour le dégradé du ciel.
-- **Scroll driven animation** en JavaScript pour synchroniser les sections du CV avec la lumière du ciel.
-- **CSS glassmorphism** pour les panneaux de contenu.
+### Dépannage installation
+Si `npm install` retourne un `403 Forbidden`, il s’agit généralement d’une restriction réseau et non d’un problème de dépendances (React 18, Three.js et Vite sont des versions publiques stables). Vérifications rapides :
 
-## Hébergement & performance
-- Hébergez l'expérience sur un service statique (Vercel, Netlify, GitHub Pages ou Cloudflare Pages) afin de bénéficier d'un CDN mondial et de la compression automatique.
-- Activez `cache-control` long sur `three.module.js` servi depuis CDN et servez vos assets via HTTP/2 pour des temps de chargement minimisés.
-- Maintenez la taille du canvas à `devicePixelRatio` limité à 2 (déjà géré dans `main.js`) pour équilibrer finesse et performance sur mobile.
-- Lorsque vous ajouterez des modèles 3D supplémentaires, préférez des géométries low poly, compressez-les en Draco/GLTF et chargez-les de manière paresseuse pour préserver la fluidité du scroll.
+- Assurez-vous que le registre npm par défaut est accessible : `npm config set registry https://registry.npmjs.org/`.
+- Nettoyez un éventuel proxy bloquant : `npm config delete proxy` et `npm config delete https-proxy`.
+- Réessayez après avoir vidé le cache : `npm cache clean --force` puis `npm install`.
+- En environnement d’entreprise, ajoutez un `.npmrc` local avec les identifiants/proxy nécessaires (un `.npmrc` de base est fourni à la racine avec le registre public configuré).
+
+## Technologies principales
+- **React 18 + Vite** pour une structure moderne, rapide et prête au déploiement CDN.
+- **Three.js** pour la scène low poly personnalisée (shader du ciel, soleil/lune, particules d’étoiles, personnage stylisé).
+- **Scroll-driven storytelling** via React (calcul de la progression, synchronisation UI ↔ scène 3D).
+- **Design system** Space Grotesk, glassmorphism, boutons capsules et transitions fluides.
+
+## Hébergement & optimisation
+- Déployez le dossier `dist/` sur Vercel, Netlify, Cloudflare Pages ou GitHub Pages pour bénéficier d’un CDN global.
+- Activez `splitChunks` (déjà géré par Vite) et servez `three` depuis le bundle local pour éviter des requêtes externes.
+- Maintenez `devicePixelRatio` plafonné à 2 (géré dans `CanvasScene`) pour équilibrer finesse et performances sur mobile.
+- Optimisez les assets futurs : privilégiez des géométries low poly, compressez vos GLTF avec Draco et chargez-les de façon paresseuse si la scène grossit.
