@@ -1,11 +1,42 @@
-Create a professional and elegant 2.5D illustration designed for an interactive portfolio website.
+# Portfolio 3D Low Poly (React + Three.js)
 
-The scene shows a smooth minimalist hill in the foreground, with a small, simple, semi-realistic human figure sitting peacefully at the top. The environment must be clean, modern and premium — inspired by Apple-style gradients and MIT Media Lab visual design.
+Expérience WebGL en React qui raconte le CV d’Anthony Moulin grâce à un cycle jour/nuit synchronisé au scroll. La colline low poly et
+le personnage restent fixes pendant que le ciel, les astres et les cartes de contenu évoluent.
 
-In the sky above the character, generate a structured 3D-like mind-map made of thin glowing lines and geometric nodes. The central node contains the text “Anthony Moulin”, and the surrounding nodes represent: “Artificial Intelligence”, “Data Science”, “Optimization & Decision Support”, “Process Mining”, and “Unity/AR Development”. Each domain may have a few smaller nodes (Python, TensorFlow, GANs, PM4Py, Firebase, React, C#, etc.).
+## Aperçu créatif
+- Canvas Three.js géré par React qui interpole les gradients du ciel, la position du soleil/de la lune et l’opacité des étoiles selon le scroll.
+- Timeline UI en glassmorphism : chaque carte du CV se remplit à mesure que l’utilisateur progresse dans la journée.
+- Section CTA et footer social pour conclure l’expérience avec un appel à collaboration.
 
-The sky should visually support a time-of-day transition (sunrise → daytime → sunset → night). At night, the mind-map should glow softly like constellations.
+## Démarrer le projet
+```bash
+npm install
+npm run dev
+```
+Le serveur Vite s’ouvre par défaut sur [http://localhost:4173](http://localhost:4173).
 
-Make the image ideal for parallax and depth-map animation: clear layer separation between foreground (hill + character), midground (mind-map), and background (sky).
+### Build de production
+```bash
+npm run build
+npm run preview
+```
 
-Style: minimalistic, soft lighting, subtle gradients, premium, scientific, and professional. No cartoon look. Perfect for a dynamic engineering CV website.
+### Dépannage installation
+Si `npm install` retourne un `403 Forbidden`, il s’agit généralement d’une restriction réseau et non d’un problème de dépendances (React 18, Three.js et Vite sont des versions publiques stables). Vérifications rapides :
+
+- Assurez-vous que le registre npm par défaut est accessible : `npm config set registry https://registry.npmjs.org/`.
+- Nettoyez un éventuel proxy bloquant : `npm config delete proxy` et `npm config delete https-proxy`.
+- Réessayez après avoir vidé le cache : `npm cache clean --force` puis `npm install`.
+- En environnement d’entreprise, ajoutez un `.npmrc` local avec les identifiants/proxy nécessaires (un `.npmrc` de base est fourni à la racine avec le registre public configuré).
+
+## Technologies principales
+- **React 18 + Vite** pour une structure moderne, rapide et prête au déploiement CDN.
+- **Three.js** pour la scène low poly personnalisée (shader du ciel, soleil/lune, particules d’étoiles, personnage stylisé).
+- **Scroll-driven storytelling** via React (calcul de la progression, synchronisation UI ↔ scène 3D).
+- **Design system** Space Grotesk, glassmorphism, boutons capsules et transitions fluides.
+
+## Hébergement & optimisation
+- Déployez le dossier `dist/` sur Vercel, Netlify, Cloudflare Pages ou GitHub Pages pour bénéficier d’un CDN global.
+- Activez `splitChunks` (déjà géré par Vite) et servez `three` depuis le bundle local pour éviter des requêtes externes.
+- Maintenez `devicePixelRatio` plafonné à 2 (géré dans `CanvasScene`) pour équilibrer finesse et performances sur mobile.
+- Optimisez les assets futurs : privilégiez des géométries low poly, compressez vos GLTF avec Draco et chargez-les de façon paresseuse si la scène grossit.
